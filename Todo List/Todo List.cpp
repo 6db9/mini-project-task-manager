@@ -80,27 +80,27 @@ class Task {
         }
 
         // getters
-        int getId() {
+        int getId() const {
             return id;
         }
 
-        std::string getTitle() {
+        const std::string& getTitle() const {
             return title;
         }
 
-        Category getCategory() {
+        Category getCategory() const {
             return category;
         }
 
-        Priority getPriority() {
+        Priority getPriority() const {
             return priority;
         }
 
-        Status getStatus() {
+        Status getStatus() const {
             return status;
         }
 
-        std::string getTime() const {
+        const std::string& getTime() const {
             return time;
         }
 
@@ -350,7 +350,7 @@ void modify_task(Field field, int id, std::vector<Task>& tasks) {
 
             tasks[index].SetStatus(s);
 
-            std::cout << "Status changed Succesfully";
+            std::cout << "Status changed Succesfully\n";
             break;
 
         }
@@ -371,13 +371,13 @@ void modify_task(Field field, int id, std::vector<Task>& tasks) {
 
             tasks[index].SetPriority(p);
 
-            std::cout << "Priority changed Succesfully";
+            std::cout << "Priority changed Succesfully\n";
             break;
         }
         case Field::category: {
             Category c = c_input();
             tasks[index].SetCategory(c);
-
+            std::cout << "Category changed Succesfully\n";
             break;
         }
     }
@@ -447,7 +447,7 @@ void export_tasks(std::vector<Task> tasks) {
 
     FormattedTaskFile.close();
 
-    std::cout << "Tasks Exported Succesfully";
+    std::cout << "\nTasks Exported Succesfully\n";
 }
 
 
@@ -485,7 +485,7 @@ void import_tasks(std::vector<Task>& tasks, const std::string& filename) {
         }
     }
     file.close();
-    std::cout << "Tasks imported successfully\n";
+    std::cout << "\nTasks imported successfully\n";
 }
 
 
