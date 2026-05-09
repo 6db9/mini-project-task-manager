@@ -385,6 +385,59 @@ void modify_task(Field field, int id, std::vector<Task>& tasks) {
 }
 
 
+// method to display task statistics
+void show_statistics(std::vector<Task> tasks) {
+    if (tasks.empty()) {
+        std::cout << "|----------------------|\n";
+        std::cout << "|   No tasks to show   |\n";
+        std::cout << "|----------------------|\n";
+        return;
+    }
+
+    int total = tasks.size();
+    int afaire = 0, encours = 0, terminee = 0;
+    int low = 0, medium = 0, high = 0;
+    int travail = 0, personnel = 0, urgent = 0, autre = 0;
+
+    for (const auto& task : tasks) {
+        switch (task.getStatus()) {
+            case Status::Afaire: afaire++; break;
+            case Status::EnCours: encours++; break;
+            case Status::Terminee: terminee++; break;
+        }
+
+        switch (task.getPriority()) {
+            case Priority::Low: low++; break;
+            case Priority::Medium: medium++; break;
+            case Priority::High: high++; break;
+        }
+
+        switch (task.getCategory()) {
+            case Category::Travail: travail++; break;
+            case Category::Personnel: personnel++; break;
+            case Category::Urgent: urgent++; break;
+            case Category::Autre: autre++; break;
+        }
+    }
+
+    std::cout << "\n========== TASK STATISTICS ==========\n";
+    std::cout << "Total Tasks: " << total << "\n";
+    std::cout << "\nBy Status:\n";
+    std::cout << "  - A faire:   " << afaire << "\n";
+    std::cout << "  - En cours:  " << encours << "\n";
+    std::cout << "  - Terminee:  " << terminee << "\n";
+    std::cout << "\nBy Priority:\n";
+    std::cout << "  - Low:    " << low << "\n";
+    std::cout << "  - Medium: " << medium << "\n";
+    std::cout << "  - High:   " << high << "\n";
+    std::cout << "\nBy Category:\n";
+    std::cout << "  - Travail:   " << travail << "\n";
+    std::cout << "  - Personnel: " << personnel << "\n";
+    std::cout << "  - Urgent:    " << urgent << "\n";
+    std::cout << "  - Autre:     " << autre << "\n";
+    std::cout << "====================================\n\n";
+}
+
 // method to show tasks sorted by priority and time
 void tasks_sorted(std::vector<Task> tasks) { 
     if (tasks.empty()) {
@@ -506,14 +559,15 @@ int main()
         std::cout << "|7. Sort tasks                    |\n";
         std::cout << "|8. Export tasks                  |\n";
         std::cout << "|9. Import tasks                  |\n";
-        std::cout << "|10. Quitter                      |\n";
+        std::cout << "|10. View Statistics              |\n";
+        std::cout << "|11. Quitter                      |\n";
         std::cout << "|---------------------------------|\n";
 
         int choice;
         std::cout << "choissisez: ";
 
         if (!(std::cin >> choice)) {
-            std::cout << "Invalid input! Please enter a number (1..10)\n";
+            std::cout << "Invalid input! Please enter a number (1..11)\n";
             std::cin.clear(); 
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
             continue; 
@@ -608,6 +662,10 @@ int main()
                 
             }
             case 10: {
+                show_statistics(tasks);
+                break;
+            }
+            case 11: {
                 std::cout << "Bye!\n";
                 std::exit(1);
             }
