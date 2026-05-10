@@ -40,5 +40,3 @@ g++ -std=c++20 'Todo List.cpp' -o TaskManager
 3.  **Sauvegarde** : Utilisez l'option **Export** avant de quitter pour conserver vos données.
 4.  **Reprise** : Au prochain lancement, utilisez l'option **Import** et saisissez `formated_tasks.txt` pour restaurer votre liste.
 
----
-**Auteur** : [Khalid Azaanoun]  
